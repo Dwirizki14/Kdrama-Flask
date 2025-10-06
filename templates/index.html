@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Sistem Rekomendasi K-Drama</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <h1>🎬 Sistem Rekomendasi Drama Korea</h1>
+
+      <form action="/recommend" method="POST" class="search-box">
+        <input
+          type="text"
+          name="movie"
+          placeholder="Masukkan judul drama..."
+          required
+        />
+        <button type="submit">Cari</button>
+      </form>
+
+      {% if message %}
+      <p class="error">{{ message }}</p>
+      {% endif %} {% if posters %}
+      <h2>Rekomendasi untuk: <span>{{ title }}</span></h2>
+      <div class="poster-gallery">
+        {% for item in posters %}
+        <div class="poster-item">
+          <img src="{{ item.poster }}" alt="{{ item.title }}" />
+          <p>{{ item.title }}</p>
+        </div>
+        {% endfor %}
+      </div>
+      {% endif %}
+    </div>
+  </body>
+</html>
